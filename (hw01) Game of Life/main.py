@@ -10,7 +10,6 @@ def handle_input() -> tuple[int, int, int, list[str]]:
 
     grid = []   # a grid containing initial state of the game
     for x in range(height):
-        grid.append(input())
+        grid.append(list(input()))  # append each row of the grid as a list
 
     return width, height, number_of_cycles, grid
-
