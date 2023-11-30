@@ -13,10 +13,10 @@ Program dostane zadané rozměry světa (šířku a výšku). Každá buňka je 
 ..........<br />
 Svět se vyvíjí v časových krocích. Při jednom kroku se pro každou buňku přepočítá, zda zemře, ožije a nebo zůstane tak jak je. To vše se odvíjí od jejích sousedů:
 
-Každá živá buňka s méně než dvěma živými sousedy zemře.
-Každá živá buňka se dvěma nebo třemi živými sousedy zůstává žít.
-Každá živá buňka s více než třemi živými sousedy zemře.
-Každá mrtvá buňka s právě třemi živými sousedy oživne.
+Každá živá buňka s méně než dvěma živými sousedy zemře.<br />
+Každá živá buňka se dvěma nebo třemi živými sousedy zůstává žít.<br />
+Každá živá buňka s více než třemi živými sousedy zemře.<br />
+Každá mrtvá buňka s právě třemi živými sousedy oživne.<br />
 Jelikož nemůžeme simulovat nekonečný svět, tak budeme simulovat cyklický svět. To znamená, že pokud počítám živé sousedy buňky na úplném spodku světa, tak zespoda sousedí s odpovídajícími buňkami na úplném vršku světa. Stejně tak je svět cyklický i zprava doleva.
 
 Pro více informací se podívejte na stránku wikipedie.
