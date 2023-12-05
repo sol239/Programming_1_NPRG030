@@ -28,10 +28,10 @@ class CircularQueue:
             if self.head >= self.tail:
                 self.head += self.size
 
-            for x in range(self.size):
-                self.queue.insert(self.tail, None)
-                self.tail += 1
-                self.size += 1
+            self.queue[self.tail:self.tail] = [None] * self.size
+
+            self.tail += self.size
+            self.size *= 2
 
             print(f"Resized to {self.size} elements")
             self.tail = temp_tail
@@ -142,13 +142,13 @@ class CircularQueue:
 #
 # sample5()
 
-# def sample6():
-#     q = CircularQueue(1)
-#     for x in range(5):
-#         q.enqueue(x)
-#         q.enqueue(2 * x)
-#         q.dequeue()
-#
-#     print('count is', q.count())
-#     print('avg is', q.avg())
-# sample6()
+def sample6():
+    q = CircularQueue(1)
+    for x in range(5):
+        q.enqueue(x)
+        q.enqueue(2 * x)
+        q.dequeue()
+
+    print('count is', q.count())
+    print('avg is', q.avg())
+sample6()
