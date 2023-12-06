@@ -37,17 +37,22 @@ def IntersectionDestruct(a,b):
     * vysledek je MNOZINA, takze se hodnoty neopakuji """
     # sem doplnte kod funkce, dalsi casti zdrojoveho kodu NEMENTE
 
+    result = Prvek(0, None)
+    tail = result
 
-    if a == None or b == None:
-        return None
+    while a != None and b != None:
+        if a.x == b.x:
+            tail.dalsi = a
+            tail = tail.dalsi
+            a = a.dalsi
+            b = b.dalsi
+        elif a.x < b.x:
+            a = a.dalsi
+        else:
+            b = b.dalsi
 
-    if a.x == b.x:
-        return Prvek(a.x, IntersectionDestruct(a.dalsi, b.dalsi))
-    elif a.x < b.x:
-        return IntersectionDestruct(a.dalsi, b)
-    else:
-        return IntersectionDestruct(a, b.dalsi)
-
+    tail.dalsi = None
+    return result.dalsi
 
 
 #################################################
