@@ -98,5 +98,16 @@ def implementation_1():
 
     bank_out(days)
 
+def implementaion_2():
+    """Implementation using binary search tree"""
+    def handle_input():
 
-implementation_1()
+        dataset = open("bank.in", "r", encoding="utf-8").read()
+        days = []
+        for day in dataset.splitlines():
+            days.append(day.split(";")[:-1])
+        return days
+
+    days = handle_input()
+
+implementaion_2()
