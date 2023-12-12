@@ -1,65 +1,73 @@
-Naprogramujte software pro banku.
+# Bank Software
 
-Při implementaci použijte binární vyhledávací strom.
+This project involves programming software for a bank. The implementation should use a binary search tree.
 
-Poskytované služby
+## Services Provided
 
-Klienti si v bance zakládají účty, ukládají na ně peníze a provádějí výběry. Když nejsou spokojeni, tak si účet zruší.
+Clients can create accounts, deposit money, make withdrawals, and close their accounts if they are not satisfied.
 
-Co banka potřebuje?
+## Client Identification
 
-Klienti jsou identifikováni pomocí unikátních šesticiferných čísel, která nezačínají 0. V souboru bank.in jsou na každém řádku transakce z jednoho dne provozu banky oddělené znakem středník (za poslední operací na řádku je středník taky). Kódování jedné transakce je následující:
+Clients are identified by unique six-digit numbers that do not start with 0. In the `bank.in` file, each line represents transactions from one day of bank operations, separated by a semicolon (there is also a semicolon after the last operation on the line). The encoding of one transaction is as follows:
 
-CISLO_UCTU:KOD:CASTKA;
-kde:
+`ACCOUNT_NUMBER:CODE:AMOUNT;`
 
-CISLO_UCTU je šestimístné číslo, které jednoznačně identifikuje klienta
+where:
 
-KOD je velké písmeno, které určuje typ transakce. Možnosti jsou:
+- `ACCOUNT_NUMBER` is a six-digit number that uniquely identifies the client.
+- `CODE` is a capital letter that determines the type of transaction. The options are:
+  - `N` - create a new account (New)
+  - `Q` - close an existing account (Quit)
+  - `I` - increase the amount stored in the account (Increase)
+  - `D` - decrease the amount stored in the account (Decrease)
+- `AMOUNT` is a non-negative integer (for `N`, it's the initial deposit amount, for `I/D`, it's the increase/decrease amount, and for `Q`, the value doesn't matter).
 
-N .... založit nový účet (New)
-Q....zrušit existující účet (Quit)
-I .... zvýšit uloženou částku na daném účtu (Increase)
-D....snížit uloženou částku na daném účtu (Decrease)
-CASTKA je nezáporné celé číslo (v případě N jde o iniciální vloženou částku, v případě I/D jde o přírůstek/úbytek a v případě Q na hodnotě nezáleží)
+## Program Functionality
 
-Program má za úkol provést zadané transakce pro všechny dny (řádky souboru bank.in). Do souboru bank.out má potom vypsat pro každý den hlášení o průběhu transakcí a výpis aktuálního stavu všech účtů.
+The program should perform the specified transactions for all days (lines of the `bank.in` file). Then, it should write a report of the transactions and the current state of all accounts for each day to the `bank.out` file.
 
-Výpis každého dne začíná řádkem:
+The report for each day starts with the line:
 
-=== DAY ===
-kde DAY je číslo řádku vstupního souboru.
+`=== DAY ===`
 
-Hlášení o průběhu obsahuje řádek pro každou provedenou transakci. Pokud je transakce úspěšná, příslušný řádek má být ve formátu:
+where `DAY` is the line number of the input file.
 
-TRANSAKCE OK
-V případě neúspěšné transakce chceme vědět kde se stala chyba. Formát řádku, který přísluší k neúspěšné transakci, je:
+The report includes a line for each transaction. If the transaction is successful, the corresponding line should be in the format:
 
-TRANSAKCE chyba: POPIS_CHYBY
-POPIS_CHYBY je řetězec:
+`TRANSACTION OK`
 
-"ucet neexistuje!" v případě, že pro dané číslo účtu nemáme žádný záznam
-"ucet uz existuje!" v případě, že má být založen nový účet s číslem, které už je použité
-"nizky stav uctu!" pokud by někdo chtěl vybírat víc než na má na účtě uloženo
-TRANSAKCE znamená trojici: CISLO_UCTU:KOD:CASTKA (bez středníku)
+In case of an unsuccessful transaction, we want to know where the error occurred. The format of the line corresponding to an unsuccessful transaction is:
 
-Po provedení všech transakcí z aktuálně zpracovávaného dne má být vypsán oddělovací řádek:
+`TRANSACTION error: ERROR_DESCRIPTION`
 
-======
-Poté bude následovat výpis stavů všech účtů ve formátu:
+`ERROR_DESCRIPTION` is a string:
 
-CISLO_UCTU:CASTKA
-Ve výpisu musí být čísla účtů seřazena podle velikosti od nejmenšího (zde se dá vhodně využít implementace pomocí binárního vyhledávacího stromu).
+- "account does not exist!" if we don't have any record for the given account number
+- "account already exists!" if a new account is to be created with a number that is already in use
+- "low account balance!" if someone wants to withdraw more than they have deposited in their account
 
-Pokud úlohu naprogramujete s použitím binárního vyhledávacího stromu (a napíšete do komentáře, že jste použili BVS), přidělím vám dvojnásobek bodů (to se nestane automaticky, to udělám ručně po vypršení deadlinu).
+`TRANSACTION` means the triplet: `ACCOUNT_NUMBER:CODE:AMOUNT` (without a semicolon)
 
-Příklad:
+After performing all transactions from the currently processed day, an separator line should be printed:
+
+`======`
+
+Then, the states of all accounts should be printed in the format:
+
+`ACCOUNT_NUMBER:AMOUNT`
+
+In the printout, the account numbers must be sorted in ascending order (this is where the implementation using a binary search tree can be conveniently used).
+
+If you program the task using a binary search tree (and write in the comment that you used BST), I will award you double points (this will not happen automatically, I will do it manually after the deadline).
+
+## Example
 
 bank.in:
 
 222222:N:10;111111:N:50;333333:N:6000000;
 111111:I:2000;333333:N:6;222222:D:20;
 444444:N:42;222222:Q:0;
+
 bank.out:
 
 === 1 ===
