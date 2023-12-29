@@ -1,9 +1,10 @@
-#n = ("− * / 15 − 7 + 1 1 3 + 2 + 1 1")
 n = input()
+
 n = n.split()[::-1]
 
+
 def solution(n):
-    error_message = "CHYBA"
+    error_message = "ERROR"
     stack = []
     for x in n:
 
@@ -28,9 +29,13 @@ def solution(n):
                     stack.append(prvni_cislo // druhe_cislo)
                 except ZeroDivisionError:
                     return error_message
-        #print(x)
-        #print(stack)
-        #print("-----")
+        print(x)
+        print(stack)
+        print("-----")
+    if len(stack) != 1:
+        return error_message
+
     return int(stack[0])
+
 
 print(solution(n))
