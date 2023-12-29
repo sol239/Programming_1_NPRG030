@@ -5,37 +5,38 @@ n = n.split()[::-1]
 
 def solution(n):
     error_message = "ERROR"
-    stack = []
+    stack_numbers = []
+    stack_operators = []
+
     for x in n:
-
         try:
-            x = int(x)
-            stack.append(x)
+            stack_numbers.append(int(x))
         except ValueError:
+            stack_operators.append(x)
+
+    for operator in stack_operators:
+        try:
+            num_1 = stack_numbers.pop()
+            num_2 = stack_numbers.pop()
+        except IndexError:
+            return error_message
+
+        if operator == "+":
+            stack_numbers.append(num_1 + num_2)
+        elif operator == "-":
+            stack_numbers.append(num_1 - num_2)
+        elif operator == "*":
+            stack_numbers.append(num_1 * num_2)
+        elif operator == "/":
             try:
-                prvni_cislo = int(stack.pop())
-                druhe_cislo = int(stack.pop())
-            except IndexError:
+                stack_numbers.append(num_1 // num_2)
+            except ZeroDivisionError:
                 return error_message
-
-            if x == "+":
-                stack.append(prvni_cislo + druhe_cislo)
-            elif x == "−":
-                stack.append(prvni_cislo - druhe_cislo)
-            elif x == "*":
-                stack.append(prvni_cislo * druhe_cislo)
-            elif x == "/":
-                try:
-                    stack.append(prvni_cislo // druhe_cislo)
-                except ZeroDivisionError:
-                    return error_message
-        print(x)
-        print(stack)
-        print("-----")
-    if len(stack) != 1:
+    if len(stack_numbers) > 1:
         return error_message
+    return int(stack_numbers[0])
 
-    return int(stack[0])
+
 
 
 print(solution(n))
